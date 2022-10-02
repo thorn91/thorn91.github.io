@@ -1,0 +1,60 @@
+@import '../scss/mixins';
+
+$dark-gray: #18181B;
+
+.main {
+    display: grid;
+    grid-template-areas:
+        "left content right";
+    grid-template-columns: 8vw 1fr 8vw;
+    grid-template-rows: 100vh;
+    justify-content: start;
+    align-items: center;
+
+    background: $dark-gray;
+    color: white;
+
+    .left,
+    .right {
+        background-color: black;
+        width: 100%;
+        height: 100%;
+    }
+
+    .left {
+        grid-area: left;
+    }
+
+    .right {
+        grid-area: right;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        padding: 0 4rem;
+
+        .h-no-gap {
+            margin: 0;
+            padding: 0;
+        }
+
+        .name {
+            font-size: 1rem;
+        }
+
+        .blurb {
+            font-size: 1.5rem;
+        }
+
+    }
+
+    @include small {}
+
+    @include medium {}
+
+    @include large {}
+}
