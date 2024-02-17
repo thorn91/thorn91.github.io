@@ -1,15 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import WhiskersImage from '../assets/images/whiskers.jpg';
+import AlexWillImage from '../assets/images/alex_william_horn_profile.jpg';
 import { Image } from 'astro:assets';
 ---
 <Layout title="Alexander Horn">
     <main>
         <div>
-            Hi, I'm Alex Horn!  This is my cat Whiskers!
+            Hi, I'm Alex Horn! This is my myself, my brother, William, and our cat, Whiskers.
         </div>
 
-        <Image src={WhiskersImage} alt="Whiskers"  />
+        <Image class="me" src={ AlexWillImage } alt="Alex and William"/>
+        <Image class="cat" src={ WhiskersImage } alt="Whiskers"/>
     </main>
 </Layout>
 
@@ -20,12 +22,18 @@ import { Image } from 'astro:assets';
         align-items: center;
         justify-content: center;
         height: 100vh;
+        gap: 16px;
     }
 
     img {
         width: 100%;
         max-width: 400px;
         border-radius: 50%;
+
+        &:hover {
+            transform: scale(1.1);
+            transition: transform 0.5s;
+        }
     }
 
 </style>
