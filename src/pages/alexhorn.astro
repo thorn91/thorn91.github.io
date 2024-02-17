@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WhiskersImage from '../assets/images/whiskers.jpg';
+import { Image } from 'astro:assets';
+---
+<Layout title="Alexander Horn">
+    <main>
+        <div>
+            Hi, I'm Alex Horn!  This is my cat Whiskers!
+        </div>
+
+        <Image src={WhiskersImage} alt="Whiskers"  />
+    </main>
+</Layout>
+
+<style lang="scss">
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 50%;
+    }
+
+</style>
