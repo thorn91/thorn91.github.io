@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Annime from "../assets/images/annvitation.webp";
+import { Image } from "astro:assets";
+---
+
+<Layout title="Annvitation">
+    <section class="annvitation-container">
+        <div class="invitation">
+            <h1>It's a (non-specific) celebration!!</h1>
+            <h2>Transfer Food Hall, May 24th 6:30-8:30pm</h2>
+            <h3>No RSVP required. Light Refreshments + Cash bar</h3>
+        </div>
+        <Image
+            class="annvitation"
+            src={Annime}
+            alt="Transfer Food Hall, May 24 6:30-7:30pm"
+        />
+        <div class="disclaimer">
+            <h1>Disclaimer:</h1>
+            <p>
+                This is a general celebration of Life and Annie and has nothing
+                to do with a PhD or potential defense of said PhD.
+            </p>
+            <p>
+                Organizer is not liable or responsible for any jinxes, hexes, or
+                curses that occur because of this invitation. All rights
+                reserved. Image by ChatGPT.
+            </p>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+    .invitation {
+        text-align: center;
+
+        h1 {
+            font-size: 1.1rem;
+            animation: spin 5s linear infinite;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+        }
+
+        h3 {
+            font-size: 0.95rem;
+        }
+    }
+
+    @keyframes spin {
+        20% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .annvitation-container {
+        display: grid;
+        height: 100vh;
+        width: 100%;
+        place-items: center;
+    }
+
+    .annvitation {
+        height: 80vh;
+        width: auto;
+        max-width: 100%;
+        border-radius: 10%;
+    }
+
+    .disclaimer {
+        h1 {
+            font-size: 1rem;
+        }
+
+        font-size: 0.75rem;
+        text-align: center;
+    }
+</style>
