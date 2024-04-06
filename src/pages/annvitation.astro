@@ -7,7 +7,11 @@ import { Image } from "astro:assets";
 <Layout title="Annvitation">
     <section class="annvitation-container">
         <div class="invitation">
-            <h1>It's a (non-specific) celebration!!</h1>
+            <h1 class="invitation-top">
+                <span>It's a</span><div class="non-specific">
+                    (non-specific)
+                </div><span>celebration!!</span>
+            </h1>
             <h2>Transfer Food Hall, May 24th 6:30-8:30pm</h2>
             <h3>No RSVP required. Light Refreshments + Cash bar</h3>
         </div>
@@ -35,9 +39,21 @@ import { Image } from "astro:assets";
     .invitation {
         text-align: center;
 
+        .invitation-top {
+            display: flex;
+            flex-flow: row nowrap;
+            place-content: center;
+            gap: 0.5rem;
+        }
+
         h1 {
             font-size: 1.1rem;
             animation: spin 5s linear infinite;
+
+            .non-specific {
+                font-weight: bold;
+                animation: pulse 1s linear infinite;
+            }
         }
 
         h2 {
@@ -55,6 +71,18 @@ import { Image } from "astro:assets";
         }
         100% {
             transform: rotate(360deg);
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
         }
     }
 
