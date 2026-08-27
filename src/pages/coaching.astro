@@ -82,6 +82,30 @@ const icon = (name: string) =>
       name="description"
       content="Frame-accurate movement analysis for clinicians. Measure joint angles, mark up the fix, and send clients a clip they'll understand — all on your iPhone. Now in TestFlight beta."
     />
+
+    <!-- Link previews (iMessage, Slack, etc). Without these a scraper grabs the
+         first big image on the page, which is a client's footage — the app icon
+         is the right face for a shared link. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pretty Good Video Coaching" />
+    <meta property="og:title" content="Pretty Good Video Coaching" />
+    <meta
+      property="og:description"
+      content="Frame-accurate movement analysis for clinicians. Now in TestFlight beta."
+    />
+    <meta property="og:url" content="https://thomashorn.info/coaching/" />
+    <meta property="og:image" content="https://thomashorn.info/coaching/icon.jpg" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content="Pretty Good Video Coaching app icon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Pretty Good Video Coaching" />
+    <meta
+      name="twitter:description"
+      content="Frame-accurate movement analysis for clinicians. Now in TestFlight beta."
+    />
+    <meta name="twitter:image" content="https://thomashorn.info/coaching/icon.jpg" />
+    <link rel="apple-touch-icon" href="/coaching/icon.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
