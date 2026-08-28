@@ -250,8 +250,9 @@ const icon = (name: string) =>
           <p class="pg-eyebrow">Now testing</p>
           <h2 class="pg-h2 pg-h2-dark">Join the TestFlight beta</h2>
           <p class="pg-install-sub">
-            Scan the code, install Apple TestFlight if you're asked, and the app is
-            yours. Free for the duration of the beta.
+            Scan the code and the app is yours. If it asks you to install Apple
+            TestFlight first, install it and then <strong>scan again</strong> —
+            opening TestFlight straight from the App Store skips the invite.
           </p>
           <ul class="pg-reqs">
             <li>iPhone · iOS 17 or later</li>
@@ -261,12 +262,18 @@ const icon = (name: string) =>
           <a class="pg-link" href={TESTFLIGHT} target="_blank" rel="noopener"
             >testflight.apple.com/join/D4kfw9zp</a
           >
+          <p class="pg-note">
+            Sorry about the extra hop. This is a deliberately small beta, so it runs
+            through TestFlight rather than the App Store — I'd rather have a handful
+            of clinicians I can actually talk to than a download count.
+          </p>
         </div>
         <a class="pg-qr" href={TESTFLIGHT} target="_blank" rel="noopener" aria-label="Scan to join the TestFlight beta">
           <div class="pg-qr-svg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 390"><g transform="scale(10)"><path fill="#fff" d="M0 0h39v39h-39z"/><path stroke="#0f172a" d="M3 3.5h7m4 0h1m1 0h1m1 0h1m3 0h2m2 0h1m2 0h7m-33 1h1m5 0h1m1 0h1m3 0h3m1 0h2m2 0h2m1 0h1m2 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m1 0h3m1 0h3m1 0h1m1 0h2m3 0h2m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m4 0h1m1 0h2m3 0h1m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m1 0h5m1 0h2m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m3 0h2m1 0h1m1 0h1m10 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-23 1h1m3 0h4m1 0h1m3 0h2m-24 1h3m1 0h2m4 0h3m1 0h1m1 0h2m1 0h2m8 0h2m-29 1h1m5 0h1m7 0h5m1 0h1m2 0h2m1 0h2m1 0h1m-31 1h1m3 0h3m1 0h1m1 0h3m1 0h1m1 0h1m2 0h3m1 0h1m1 0h3m1 0h2m-32 1h1m2 0h1m3 0h2m4 0h4m1 0h1m2 0h1m1 0h1m1 0h2m1 0h1m1 0h2m-33 1h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h2m8 0h1m2 0h1m1 0h3m1 0h2m-32 1h1m9 0h3m2 0h2m2 0h3m4 0h1m1 0h1m1 0h1m-32 1h3m3 0h2m1 0h3m1 0h1m1 0h1m2 0h2m2 0h1m3 0h1m2 0h2m-30 1h5m1 0h1m2 0h3m1 0h5m2 0h2m2 0h6m-29 1h1m1 0h1m1 0h1m2 0h6m1 0h1m3 0h7m1 0h3m-27 1h2m1 0h1m1 0h2m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1m1 0h2m1 0h2m-33 1h1m1 0h1m3 0h1m6 0h2m1 0h1m5 0h1m3 0h3m1 0h1m-30 1h5m1 0h2m10 0h1m2 0h1m2 0h2m1 0h1m2 0h2m-33 1h3m1 0h1m1 0h1m1 0h1m2 0h3m4 0h1m2 0h2m6 0h2m-31 1h2m3 0h1m1 0h1m1 0h2m10 0h2m3 0h1m2 0h1m2 0h1m-30 1h5m4 0h2m4 0h1m1 0h9m1 0h3m-32 1h1m2 0h2m2 0h1m2 0h1m3 0h2m1 0h2m3 0h3m1 0h1m1 0h1m1 0h2m-33 1h1m2 0h1m2 0h3m3 0h2m3 0h1m4 0h7m3 0h1m-25 1h4m3 0h3m1 0h3m2 0h1m3 0h2m-30 1h7m3 0h2m1 0h4m1 0h2m2 0h3m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h1m2 0h3m1 0h1m2 0h1m1 0h5m3 0h3m-31 1h1m1 0h3m1 0h1m4 0h3m1 0h1m1 0h2m2 0h8m1 0h2m-32 1h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h1m1 0h1m3 0h2m1 0h1m3 0h1m1 0h4m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h4m3 0h1m1 0h2m1 0h2m1 0h2m-31 1h1m5 0h1m1 0h3m1 0h1m2 0h2m1 0h3m2 0h3m1 0h3m2 0h1m-33 1h7m4 0h5m1 0h1m2 0h2m3 0h2m1 0h1m1 0h1"/></g></svg>
           </div>
           <span class="pg-qr-cap">Point your camera here</span>
+          <span class="pg-qr-cap pg-qr-note">Just installed TestFlight? Scan again.</span>
         </a>
       </div>
     </section>
@@ -642,6 +649,15 @@ const icon = (name: string) =>
     padding-bottom: 2px;
   }
   .pg-link:hover { border-color: var(--teal); }
+  .pg-note {
+    margin: 1.4rem 0 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--on-light-mut);
+    max-width: 46ch;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--hair-light);
+  }
   .pg-qr {
     display: flex;
     flex-direction: column;
@@ -664,6 +680,15 @@ const icon = (name: string) =>
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--on-light-mut);
+    text-align: center;
+  }
+  /* The rescue line, not a label — set it quieter than the caption above it. */
+  .pg-qr-note {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.78rem;
+    margin-top: -0.35rem;
+    color: #6b7a86;
   }
 
   /* ---- footer ---- */
