@@ -6,8 +6,9 @@ const TESTFLIGHT = 'https://testflight.apple.com/join/D4kfw9zp';
 const steps = [
   {
     n: '01',
-    title: 'Capture or import',
-    body: 'Record in-app or pull a clip from Photos. Your copy lives on the device.',
+    title: 'Film the angles',
+    body:
+      'Record in-app — front, back, both sides — without leaving the camera between takes. Or pull a clip in from Photos.',
   },
   {
     n: '02',
@@ -43,10 +44,10 @@ const capabilities = [
     icon: 'frame',
   },
   {
-    title: 'Build a PDF report',
+    title: 'Up to four angles per clip',
     body:
-      'Mark the moments that matter, write what to notice under each, and export a PDF — stills re-rendered at print resolution.',
-    icon: 'report',
+      'Film front, back and both sides in one go. Each angle keeps its own drawings — a knee angle measured side-on does not follow you to the front view.',
+    icon: 'angles',
   },
   {
     title: 'Trim without destroying',
@@ -70,6 +71,7 @@ const ICONS: Record<string, string> = {
   report: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8 h6"/><path d="M8 12 h8"/><path d="M8 16 h5"/>',
   trim: '<circle cx="6" cy="7" r="2.5"/><circle cx="6" cy="17" r="2.5"/><path d="M8 8.5 L19 16.5"/><path d="M8 15.5 L19 7.5"/>',
   share: '<path d="M12 15 V4"/><path d="M8 8 l4 -4 4 4"/><path d="M5 12 v6 a1 1 0 0 0 1 1 h12 a1 1 0 0 0 1 -1 v-6"/>',
+  angles: '<rect x="3" y="7" width="11" height="10" rx="2"/><path d="M17 10 l4 -2.5 v9 L17 14"/><path d="M6.5 4.5 h9"/><path d="M6.5 19.5 h9"/>',
 };
 const icon = (name: string) =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] ?? ''}</svg>`;
@@ -189,7 +191,8 @@ const icon = (name: string) =>
         <h2 class="pg-h2">Every clip, filed under the right client.</h2>
         <p class="pg-screens-sub">
           Shoot into a client from the camera, or drop clips in Unassigned and sort
-          them later. No folders to manage, no accounts to set up.
+          them later. One clip holds up to four angles of the same movement, each
+          keeping its own drawings. No folders to manage, no accounts to set up.
         </p>
       </div>
       <div class="pg-screens-row">
@@ -200,6 +203,10 @@ const icon = (name: string) =>
         <figure class="pg-shot">
           <div class="pg-phone"><img src="/coaching/clients.jpg" width="640" height="1391" alt="The Clients tab with an Unassigned inbox and a list of clients by injury area." /></div>
           <figcaption>Clients — organized by who and what</figcaption>
+        </figure>
+        <figure class="pg-shot">
+          <div class="pg-phone"><img src="/coaching/angles.jpg" width="640" height="1391" alt="The player's overflow menu open on Add angle, offering Record, From Photos and From Files." /></div>
+          <figcaption>Add angle — up to four on one clip</figcaption>
         </figure>
       </div>
     </section>
