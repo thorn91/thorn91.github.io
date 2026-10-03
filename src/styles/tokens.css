@@ -1,0 +1,30 @@
+/* Thomas Horn's personal site, in the Pretty Good Software family.
+   Grape is the shared studio ink; sunflower is this site's own second ink,
+   and their overlap is the multiply of the two. The type and paper are a
+   trial for the family: newsprint instead of cream, Familjen Grotesk and
+   Petrona instead of Bricolage and Newsreader. Light only, like the other
+   PGS sites. */
+
+:root {
+  /* Paper */
+  --paper: #ecebe5;
+  --paper-lit: #f6f5f1;
+  /* Ink (text) */
+  --ink: #241e1a;
+  --ink-muted: #5f5a53; /* 5.7:1 on --paper */
+  /* Rules */
+  --rule: #c9c3b8;
+  /* Inks */
+  --grape: #4b3a8c; /* 7.7:1 on --paper, safe as text */
+  --sunflower: #ffb511; /* fill only, never text on paper */
+  --overprint-sunflower: #4b2909; /* grape × sunflower */
+
+  /* Type */
+  --font-display: 'Familjen Grotesk', 'Helvetica Neue', sans-serif;
+  --font-body: 'Petrona', Georgia, serif;
+  --font-mono: 'Azeret Mono', ui-monospace, monospace;
+
+  --content-max: 1040px;
+  --gutter: clamp(1.5rem, 5vw, 4rem);
+  --tap: 44px;
+}
