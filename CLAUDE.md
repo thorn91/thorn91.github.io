@@ -27,7 +27,7 @@ personal. It is NOT the company site (see "Related repos" — do not blur them).
 
 | Page | What it is |
 |---|---|
-| `index.astro` | Landing page |
+| `index.astro` | Landing page, redesigned 2026-10-03 in Claude Design (see "Design" below). Styles in `src/styles/tokens.css`; resume at `public/thomas-horn-resume.pdf`. |
 | `alexhorn.astro` | Page for Alex (profile photo in `src/assets/images/`) |
 | `annvitation.astro` | Party invitation |
 | `lightsoutmaze.astro` | ~1,250-line Three.js maze game (find torches, find the exit). Committed 2026-08-28 after sitting uncommitted for a long while; live but lightly reviewed. Imports three@0.120 off unpkg inside a `<script>`. |
@@ -57,9 +57,29 @@ only the `<user>.github.io` *user* site is one-per-account):
 - `~/Source/prettygoodsoftware` → **coaching.prettygoodsoftware.llc** (product page)
 - This repo → **thomashorn.info**
 
-The personal site owes the company sites nothing stylistically. If Tom asks for
-company/product changes in a personal-site session, the answer is "that lives in the
-other repo," not a cross-repo edit from here.
+The homepage now belongs to the Pretty Good Software design family: it shares grape and the
+two-circle mark, and has its own ink (sunflower). The other pages here are not part of it. If Tom
+asks for company or product changes in a personal-site session, the answer is still "that lives
+in the other repo," not a cross-repo edit from here.
+
+## Design (Claude Design)
+
+The homepage is designed in Claude Design first and coded second. Keep the two in sync.
+
+- **Design system:** https://claude.ai/artifact/NqFZEKTHz39sumRJbBcHfU ("Pretty Good Software").
+  Read its README and its **Decisions** section (`project/decisions.md`) before proposing any
+  change. Decisions records how Tom works with Claude Design and every option tried and rejected
+  for this site, with the reasons, so they don't get proposed again.
+- **Canvas:** https://claude.ai/artifact/1p1z2muLCyUosMvegq5591. The "Homepage: live at
+  thomashorn.info" artboard matches the live page. Everything else on the canvas is labelled as
+  explorations that weren't shipped.
+- **Order of work:** change the artboard, get Tom's OK, change `index.astro`, push. Then record
+  any new token or rule in the design system and add a line to Decisions.
+- **Look and copy:** newsprint `#ecebe5`, Familjen Grotesk, Petrona and Azeret Mono. Contact is
+  tom@prettygoodsoftware.llc. No slogans, principles lists, cards or colour bands. When the "Now"
+  list changes, update its "Updated" month.
+- **The resume PDF** is a static export of Tom's resume artifact. Re-export it whenever the resume
+  changes.
 
 ## Gotchas that cost real time (learned the hard way)
 
