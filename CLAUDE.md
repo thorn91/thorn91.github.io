@@ -52,9 +52,11 @@ Same GitHub account hosts three Pages sites (unlimited *project* sites is the ru
 only the `<user>.github.io` *user* site is one-per-account):
 
 - `~/Source/prettygoodsoftware-www` → **prettygoodsoftware.llc** (company page; Riso
-  Press design — oat `#F3EBDA`, vermilion `#E14424` + grape `#4B3A8C` overprint
-  circles, Bricolage Grotesque + Newsreader)
-- `~/Source/prettygoodsoftware` → **coaching.prettygoodsoftware.llc** (product page)
+  Press design — since 2026-10-03 newsprint `#ECEBE5`, vermilion `#E14424` + grape
+  `#4B3A8C` overprint circles, Familjen Grotesk + Petrona + Azeret Mono, Astro 7;
+  see the design system linked under "Design")
+- `~/Source/prettygoodsoftware-coaching` (GitHub `thorn91/prettygoodsoftware-coaching`)
+  → **coaching.prettygoodsoftware.llc** (product page; same paper and type, teal ink)
 - This repo → **thomashorn.info**
 
 The homepage now belongs to the Pretty Good Software design family: it shares grape and the
