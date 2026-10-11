@@ -34,15 +34,16 @@ const brFlow = [
   ['Reconcile', 'Each side checked against the other'],
   ['Reporting', 'The financial reporting layer, built on top'],
 ];
-const theoryFlow = [
-  ['Attempt first', 'I say what a piece does and what must never be true before the agent drafts it'],
-  ['Facts after', 'The agent answers with the file and line, read in the same session'],
-  ['The gate', 'Before the PR, a check written from the contract; a miss names the row'],
+const callsFlow = [
+  ['Decisions card', 'Each call with its options, the context, and what changes for whom'],
+  ['Who decided', 'Me, my pick from its recommendation, or handed to the agent'],
+  ['Never blocks', 'The build carries on with the recommended answer while a call is open'],
 ];
 const anywhereFlow = [
-  ['Day job', 'Enterprise access and the ledger at Buyers Edge'],
-  ['My apps', 'Two iPhone apps in a first-time stack, built by directing agents and reviewing the paths that matter'],
-  ['The rest', 'This site, its design system, and agentom itself'],
+  ['Any harness', 'Claude Code, Codex, Cursor and Devin get the same rules'],
+  ['Any place', 'On my machine, or unattended in the cloud with a handback when I return'],
+  ['Any job', 'Building, visual testing, tickets and docs, pull request review'],
+  ['Any work', 'The day job, my apps, this site, and agentom itself'],
 ];
 const rvFlow = [
   ['Reviewed', '1,500+ pull requests across a 20-engineer org'],
@@ -56,10 +57,10 @@ const ciqFlow = [
   ['Arbiter', 'Compares the answers for agreement, contradiction and what only one found'],
   ['Backend', 'Python and FastAPI: streaming, auth, threads, slow providers'],
 ];
-const agtFlow = [
-  ['Skills', '33 skills that run the loop'],
-  ['Hooks', 'Shared across harnesses, with contract tests'],
-  ['State', 'Plans and notes live in a vault, never in the repo'],
+const reviewFlow = [
+  ['Flows', 'A scenario lights its path through screen, endpoint, domain and data'],
+  ['Rules', 'Each one with where the code enforces it, and the evidence'],
+  ['Code', 'Pasted from git by a script, never typed by the model'],
 ];
 
 const ledger = [
@@ -84,8 +85,7 @@ const bank = [
 ];
 
 const models = ['GPT', 'Claude', 'Gemini', 'Grok'];
-const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave it'];
-const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
+const lanes = ['Screen', 'Endpoint', 'Domain', 'Data'];
 ---
 
 <div id="resume-mode" class="rm" role="dialog" aria-modal="true" aria-label="Resume mode" hidden>
@@ -259,35 +259,38 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
     </figure>
 
     <figure class="rm-plate" data-plate="theory">
-      <div class="rm-draft">
-        <div class="rm-box"><strong>1 · Me</strong><span>What the piece does, and what must never be true</span></div>
-        <i class="rm-arrow" aria-hidden="true">↓</i>
-        <div class="rm-box rm-box-ink"><strong>2 · The agent</strong><span>The detail, each claim with its file and line</span></div>
-        <i class="rm-arrow" aria-hidden="true">↓</i>
-        <div class="rm-box"><strong>3 · Me again</strong><span>Mine, the agent's, or a merge, and I can say why</span></div>
+      <div class="rm-call">
+        <p class="rm-call-q">Should a paused location keep its menu?</p>
+        <div class="rm-call-opt rm-call-rec"><b>A</b><span><strong>Keep it, hidden</strong>Nothing is lost if it comes back. Recommended.</span></div>
+        <div class="rm-call-opt"><b>B</b><span><strong>Archive it</strong>The menu leaves every report until restored.</span></div>
+        <div class="rm-call-opt rm-call-else"><b>C</b><span><strong>Something else</strong>Say it in my own words.</span></div>
+        <p class="rm-call-who"><span class="rm-chip">Decided</span> I took the recommendation</p>
       </div>
-      <figcaption>Programming is theory building (Naur, 1985). Whoever drafts first anchors the result, so my attempt comes before the agent's draft, every time.</figcaption>
+      <figcaption>An illustration, not a real decision. The build keeps going on the recommended answer while the card waits.</figcaption>
     </figure>
 
     <figure class="rm-plate" data-plate="loop">
-      <ol class="rm-loop">
-        {loop.map((s, i) => (
-          <li class:list={[i === 5 && 'last']}><b>{i + 1}</b><span>{s}</span></li>
+      <div class="rm-lanes">
+        {lanes.map((l, i) => (
+          <div class="rm-lane"><span>{l}</span><b class:list={[i < 3 && 'on']}>{['Save button', 'POST /menus', 'Menu rules', 'menus table'][i]}</b></div>
         ))}
-      </ol>
-      <div class="rm-gate"><span class="rm-chip">The gate</span>Before the PR, the engineer explains the change end to end, or it does not ship.</div>
-      <figcaption>The engineer’s attempt comes before the agent’s draft, at every step.</figcaption>
+      </div>
+      <div class="rm-rules">
+        <div><span class="rm-chip">Rule</span>A menu belongs to one location<em>Enforced in Menu rules · checked by 2 tests</em></div>
+        <div><span class="rm-chip">Rule</span>Prices never go below zero<em>Enforced in Menu rules · reflected on the Save button</em></div>
+      </div>
+      <figcaption>An illustration of the review view: one scenario's path through the layers, and each rule with where the code holds it.</figcaption>
     </figure>
 
     <figure class="rm-plate" data-plate="anywhere">
       <div class="rm-scales">
-        <div><b>Day job</b><span>Buyers Edge</span></div>
-        <div><b>My apps</b><span>Pretty Good Software</span></div>
-        <div><b>The rest</b><span>Whatever I point it at</span></div>
+        <div><b>Any harness</b><span>Claude Code, Codex, Cursor, Devin</span></div>
+        <div><b>Any place</b><span>My machine or the cloud</span></div>
+        <div><b>Any work</b><span>The day job, my apps, the rest</span></div>
       </div>
-      <div class="rm-loopline"><span>One loop, mine</span></div>
-      <p class="rm-plate-label">In whichever harness</p>
-      <div class="rm-tags">{harnesses.map((h) => <span class="rm-chip">{h}</span>)}</div>
+      <div class="rm-loopline"><span>The same rules, and the calls still come back to me</span></div>
+      <p class="rm-plate-label">Jobs it runs</p>
+      <div class="rm-tags">{['Build', 'Visual testing', 'Tickets and docs', 'PR review'].map((h) => <span class="rm-chip">{h}</span>)}</div>
     </figure>
 
     <figure class="rm-plate" data-plate="apps">
@@ -351,28 +354,28 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
     </ol>
   </template>
 
-  <template data-stop="theory" data-seg="The theory" data-slug="Working with agents · the theory">
-    <p class="rm-meta-line rise">Working with agents, the theory</p>
-    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">I keep the theory, the agent does the detail</h2>
-    <p class="rm-lede rise" style="--d: 120ms">A program lives in the head of whoever can explain it, change it and say why each part is as it is. Agents make code cheap, so the understanding is the part I protect: nothing ships that I cannot explain end to end.</p>
+  <template data-stop="theory" data-seg="The calls" data-slug="Working with agents · the calls">
+    <p class="rm-meta-line rise">Working with agents, the calls</p>
+    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">The agent builds, the decisions come back to me</h2>
+    <p class="rm-lede rise" style="--d: 120ms">agentom is my harness for coding with agents. Even when I take the agent’s recommendation, I see every decision laid out with its options and context, as if we made it together.</p>
     <ol class="rm-flow">
-      {theoryFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
+      {callsFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
     </ol>
   </template>
 
-  <template data-stop="loop" data-seg="The loop" data-slug="Working with agents · the loop">
-    <p class="rm-meta-line rise">Working with agents, the loop</p>
-    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">One loop for every feature</h2>
-    <p class="rm-lede rise" style="--d: 120ms">agentom is the loop as code. The agent starts every step and each one takes a breath to answer, so nothing depends on remembering a process.</p>
+  <template data-stop="loop" data-seg="The review" data-slug="Working with agents · the review">
+    <p class="rm-meta-line rise">Working with agents, the review</p>
+    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">Reviewing the work as flows and rules</h2>
+    <p class="rm-lede rise" style="--d: 120ms">What the agent built comes back as one view I can zoom into, instead of a long diff: how the code flows, what must hold, and where the code holds it.</p>
     <ol class="rm-flow">
-      {agtFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
+      {reviewFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
     </ol>
   </template>
 
-  <template data-stop="anywhere" data-seg="Anything" data-slug="Working with agents · anywhere">
-    <p class="rm-meta-line rise">Working with agents, anywhere</p>
-    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">Whatever I throw at it</h2>
-    <p class="rm-lede rise" style="--d: 120ms">agentom is built for one person: me. It is harness agnostic, so the same loop runs in Claude Code, Cursor, Codex and Devin, on whatever I am working on.</p>
+  <template data-stop="anywhere" data-seg="Anything" data-slug="Working with agents · anything">
+    <p class="rm-meta-line rise">Working with agents, anything</p>
+    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">Whatever I throw at it, wherever it runs</h2>
+    <p class="rm-lede rise" style="--d: 120ms">agentom is built for one person: me. It bends to the job instead of the other way round, and the decisions still come back to me.</p>
     <ol class="rm-flow">
       {anywhereFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
     </ol>
@@ -1106,6 +1109,24 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
   .rm-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .rm-plate .rm-chip { color: var(--ink); font-size: 11px; }
 
+  .rm-call { display: flex; flex-direction: column; gap: 8px; padding: 18px; border: 1.5px solid var(--ink); background: var(--paper); }
+  .rm-call-q { font-family: var(--font-display); font-weight: 600; font-size: 18px; margin-bottom: 4px; }
+  .rm-call-opt { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border: 1.5px solid var(--rule-firm); background: var(--paper-lit); }
+  .rm-call-opt b { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border: 1.5px solid var(--ink); font-family: var(--font-mono); font-size: 12px; }
+  .rm-call-opt span { display: flex; flex-direction: column; font-size: 14px; line-height: 1.4; color: var(--ink-muted); }
+  .rm-call-opt strong { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--ink); }
+  .rm-call-rec { border-color: var(--ink); }
+  .rm-call-rec b { background: var(--sunflower); }
+  .rm-call-else { border-style: dashed; }
+  .rm-call-who { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+  .rm-lanes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .rm-lane { display: flex; flex-direction: column; gap: 8px; }
+  .rm-lane span { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+  .rm-lane b { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 6px; border: 1.5px solid var(--rule-firm); background: var(--paper); font-family: var(--font-display); font-weight: 600; font-size: 14px; text-align: center; }
+  .rm-lane b.on { border: 2.5px solid var(--grape); }
+  .rm-rules { display: flex; flex-direction: column; gap: 8px; }
+  .rm-rules div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 10px 12px; border: 1.5px solid var(--ink); background: var(--paper); font-size: 15px; }
+  .rm-rules em { flex-basis: 100%; font-style: normal; font-family: var(--font-mono); font-size: 11px; color: var(--grape); }
   .rm-draft { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
   .rm-draft .rm-arrow { text-align: center; }
   .rm-scales { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
@@ -1184,9 +1205,12 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
     }
     .rm-zoom-hit span {
       position: absolute;
-      right: 8px;
-      bottom: 8px;
-      padding: 3px 8px;
+      right: 0;
+      bottom: 100%;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
       background: var(--ink);
       color: var(--paper-lit);
       font-family: var(--font-mono);
