@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><clipPath id="pgvc-mark-lens"><circle cx="40" cy="60" r="30"/></clipPath></defs>
+  <circle cx="40" cy="60" r="30" fill="#4B3A8C"/>
+  <circle cx="60" cy="40" r="30" fill="#0E8C86"/>
+  <circle cx="60" cy="40" r="30" fill="#04204A" clip-path="url(#pgvc-mark-lens)"/>
+</svg>
