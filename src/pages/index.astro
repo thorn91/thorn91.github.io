@@ -1,5 +1,6 @@
 ---
 import '../styles/tokens.css';
+import ResumeMode from '../components/ResumeMode.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const email = 'tom@prettygoodsoftware.llc';
@@ -49,6 +50,7 @@ const elsewhere = [
   </head>
 
   <body>
+    <div id="page">
     <div class="page">
       <header class="head">
         <a class="wordmark" href="#top">
@@ -67,6 +69,9 @@ const elsewhere = [
           <a href="#now">Now</a>
           <a href="#elsewhere">Elsewhere</a>
           <a href={resume}>Resume</a>
+          <button type="button" id="resume-toggle" class="rm-toggle" aria-pressed="false">
+            Resume mode <span class="rm-switch" aria-hidden="true"><span></span></span>
+          </button>
         </nav>
       </header>
 
@@ -148,6 +153,9 @@ const elsewhere = [
         <a href={`mailto:${email}`}>{email}</a>
       </footer>
     </div>
+    </div>
+
+    <ResumeMode />
 
     <style is:global>
       *,
@@ -215,6 +223,39 @@ const elsewhere = [
         text-decoration: none;
       }
       .nav a:hover { color: var(--grape); }
+
+      /* The Resume mode switch: muted like the nav, a small square toggle. */
+      .rm-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: var(--tap);
+        padding: 0;
+        background: none;
+        border: 0;
+        font: inherit;
+        color: var(--ink-muted);
+        cursor: pointer;
+      }
+      .rm-toggle:hover { color: var(--grape); }
+      .rm-toggle:focus-visible { outline: 2px solid var(--grape); outline-offset: 3px; }
+      .rm-switch {
+        position: relative;
+        width: 32px;
+        height: 18px;
+        box-sizing: border-box;
+        border: 1.5px solid currentColor;
+      }
+      .rm-switch span {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 11px;
+        height: 11px;
+        background: currentColor;
+        transition: left 200ms ease;
+      }
+      .rm-toggle[aria-pressed='true'] .rm-switch span { left: 16px; }
 
       /* ---------- sections ---------- */
       main > section { border-top: 1px solid var(--rule); }
