@@ -40,10 +40,9 @@ const theoryFlow = [
   ['The gate', 'Before the PR, a check written from the contract; a miss names the row'],
 ];
 const anywhereFlow = [
-  ['Solo', 'Two iPhone apps in a first-time stack, built by directing agents and reviewing the paths that matter'],
-  ['Team', 'The Operations team I lead, three to five engineers'],
-  ['Org', 'One agent harness for 20 engineers: review loose on scaffolding and UI, tight on anything that moves money'],
-  ['Designers', 'A pilot where UX designers ship design-system components through agentic workflows'],
+  ['Day job', 'Enterprise access and the ledger at Buyers Edge'],
+  ['My apps', 'Two iPhone apps in a first-time stack, built by directing agents and reviewing the paths that matter'],
+  ['The rest', 'This site, its design system, and agentom itself'],
 ];
 const rvFlow = [
   ['Reviewed', '1,500+ pull requests across a 20-engineer org'],
@@ -277,11 +276,11 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
 
     <figure class="rm-plate" data-plate="anywhere">
       <div class="rm-scales">
-        <div><b>Solo</b><span>Pretty Good Software</span></div>
-        <div><b>Team</b><span>Operations, three to five engineers</span></div>
-        <div><b>Org</b><span>Buyers Edge, 20 engineers</span></div>
+        <div><b>Day job</b><span>Buyers Edge</span></div>
+        <div><b>My apps</b><span>Pretty Good Software</span></div>
+        <div><b>The rest</b><span>Whatever I point it at</span></div>
       </div>
-      <div class="rm-loopline"><span>The same theory and the same loop</span></div>
+      <div class="rm-loopline"><span>One loop, mine</span></div>
       <p class="rm-plate-label">In whichever harness</p>
       <div class="rm-tags">{harnesses.map((h) => <span class="rm-chip">{h}</span>)}</div>
     </figure>
@@ -365,10 +364,10 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
     </ol>
   </template>
 
-  <template data-stop="anywhere" data-seg="Anywhere" data-slug="Working with agents · anywhere">
+  <template data-stop="anywhere" data-seg="Anything" data-slug="Working with agents · anywhere">
     <p class="rm-meta-line rise">Working with agents, anywhere</p>
-    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">Solo, on a team, across an org</h2>
-    <p class="rm-lede rise" style="--d: 120ms">The loop is harness agnostic: Claude Code, Cursor, Codex and Devin read the same skills. What changes with the size of the group is what gets shared.</p>
+    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">Whatever I throw at it</h2>
+    <p class="rm-lede rise" style="--d: 120ms">agentom is built for one person: me. It is harness agnostic, so the same loop runs in Claude Code, Cursor, Codex and Devin, on whatever I am working on.</p>
     <ol class="rm-flow">
       {anywhereFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
     </ol>
