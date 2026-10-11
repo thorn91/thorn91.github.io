@@ -34,10 +34,16 @@ const brFlow = [
   ['Reconcile', 'Each side checked against the other'],
   ['Reporting', 'The financial reporting layer, built on top'],
 ];
-const agFlow = [
-  ['Review by risk', 'Loose on scaffolding and UI, tight on anything that moves money'],
-  ['Designers ship', 'A pilot where UX designers ship design-system components through agentic workflows'],
-  ['Engineers review', 'Engineering reviews the change instead of rebuilding the mockup'],
+const theoryFlow = [
+  ['Attempt first', 'I say what a piece does and what must never be true before the agent drafts it'],
+  ['Facts after', 'The agent answers with the file and line, read in the same session'],
+  ['The gate', 'Before the PR, a check written from the contract; a miss names the row'],
+];
+const anywhereFlow = [
+  ['Solo', 'Two iPhone apps in a first-time stack, built by directing agents and reviewing the paths that matter'],
+  ['Team', 'The Operations team I lead, three to five engineers'],
+  ['Org', 'One agent harness for 20 engineers: review loose on scaffolding and UI, tight on anything that moves money'],
+  ['Designers', 'A pilot where UX designers ship design-system components through agentic workflows'],
 ];
 const rvFlow = [
   ['Reviewed', '1,500+ pull requests across a 20-engineer org'],
@@ -80,6 +86,7 @@ const bank = [
 
 const models = ['GPT', 'Claude', 'Gemini', 'Grok'];
 const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave it'];
+const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
 ---
 
 <div id="resume-mode" class="rm" role="dialog" aria-modal="true" aria-label="Resume mode" hidden>
@@ -141,8 +148,11 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
       </svg>
       <span>Resume mode</span>
     </button>
-    <button type="button" class="rm-bar-chapter" aria-haspopup="true"></button>
-    <nav class="rm-chapters" aria-label="Tour"></nav>
+    <div class="rm-project">
+      <button type="button" class="rm-project-btn" aria-haspopup="menu" aria-expanded="false"></button>
+      <div class="rm-menu" role="menu" hidden></div>
+    </div>
+    <nav class="rm-stops" aria-label="Stops in this project"></nav>
     <button type="button" class="rm-btn rm-btn-ghost rm-exit">Exit <span class="rm-exit-long">resume mode</span> <span aria-hidden="true">×</span></button>
   </div>
 
@@ -150,29 +160,27 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
        carries it with the page; it shows only while resume mode is open. -->
   <div class="rm-table" aria-hidden="true">
     <figure class="rm-plate" data-plate="ent">
-      <div class="rm-tree">
-        <div class="rm-scope"></div>
-        <i class="l" style="left: 288px; top: 46px; width: 1.5px; height: 44px"></i>
-        <i class="l" style="left: 96px; top: 90px; width: 386px; height: 1.5px"></i>
-        <i class="l" style="left: 96px; top: 90px; width: 1.5px; height: 80px"></i>
-        <i class="l" style="left: 480px; top: 90px; width: 1.5px; height: 80px"></i>
-        <i class="l" style="left: 96px; top: 214px; width: 1.5px; height: 40px"></i>
-        <i class="l" style="left: 92px; top: 254px; width: 180px; height: 1.5px"></i>
-        <i class="l" style="left: 92px; top: 254px; width: 1.5px; height: 46px"></i>
-        <i class="l" style="left: 270px; top: 254px; width: 1.5px; height: 46px"></i>
-        <i class="l" style="left: 480px; top: 214px; width: 1.5px; height: 86px"></i>
-        <i class="p" style="left: 352px; top: 192px; width: 2px; height: 130px"></i>
-        <i class="p" style="left: 172px; top: 192px; width: 182px; height: 2px"></i>
-        <i class="p" style="left: 340px; top: 321px; width: 14px; height: 2px"></i>
-        <b class="n" style="left: 196px; top: 0; width: 184px">Restaurant group</b>
-        <b class="n" style="left: 22px; top: 170px; width: 150px">Brand A</b>
-        <span class="rm-chip" style="position: absolute; left: 150px; top: 156px">Policy</span>
-        <b class="n" style="left: 406px; top: 170px; width: 150px">Brand B</b>
-        <b class="n loc" style="left: 22px; top: 300px">Location 1</b>
-        <b class="n loc on" style="left: 200px; top: 300px">Location 2</b>
-        <b class="n loc" style="left: 410px; top: 300px">Location 3</b>
-        <span class="rm-path-note" style="left: 368px; top: 236px">Nearest policy above: Brand A</span>
-      </div>
+      <svg class="rm-tree" viewBox="0 0 576 330" role="img" aria-label="An organization tree: a restaurant group over Brand A and Brand B, Brand A over Locations 1 and 2, Brand B over Location 3. A policy sits on Brand A, and a manager at Location 2 resolves up to it.">
+        <rect class="scope" x="1" y="98" width="290" height="226" />
+        <path class="edge" d="M288 44V87M140 87H436M140 87V130M436 87V130M140 174V218M70 218H210M70 218V262M210 218V262M436 174V262" />
+        <path class="resolve" d="M210 262V218H140V182" />
+        <path class="resolve-head" d="M133 186L140 176L147 186" />
+        <rect class="node" x="208" y="0" width="160" height="44" />
+        <text class="label" x="288" y="22">Restaurant group</text>
+        <rect class="node" x="65" y="130" width="150" height="44" />
+        <text class="label" x="140" y="152">Brand A</text>
+        <rect class="tag" x="111" y="106" width="58" height="20" />
+        <text class="tag-text" x="140" y="116">Policy</text>
+        <rect class="node" x="361" y="130" width="150" height="44" />
+        <text class="label" x="436" y="152">Brand B</text>
+        <rect class="node" x="10" y="262" width="120" height="44" />
+        <text class="loc" x="70" y="284">Location 1</text>
+        <rect class="node on" x="150" y="262" width="120" height="44" />
+        <text class="loc on" x="210" y="284">Location 2</text>
+        <rect class="node" x="376" y="262" width="120" height="44" />
+        <text class="loc" x="436" y="284">Location 3</text>
+      </svg>
+      <p class="rm-legend"><i class="resolve"></i>Resolves up to the nearest policy<i class="scope"></i>What the manager sees</p>
       <figcaption>A manager at Location 2 resolves to Brand A’s policy, so they see Brand A and its locations. Brand B stays out of view.</figcaption>
     </figure>
 
@@ -214,27 +222,6 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
       </div>
     </figure>
 
-    <figure class="rm-plate" data-plate="ag">
-      <div class="rm-harness">
-        <div class="rm-box"><strong>20 engineers</strong><span>Each with an agent</span></div>
-        <i class="rm-arrow" aria-hidden="true">→</i>
-        <div class="rm-box rm-box-ink"><strong>One harness</strong><span>CLAUDE.md, lint rules, standards</span></div>
-        <i class="rm-arrow" aria-hidden="true">→</i>
-        <div class="rm-box"><strong>One style</strong><span>Wherever the code came from</span></div>
-      </div>
-      <p class="rm-plate-label">Review scales with risk</p>
-      <div class="rm-risk">
-        <div><span>Scaffolding and UI</span><b style="--w: 30%"></b><em>Loose</em></div>
-        <div><span>Anything that moves money</span><b style="--w: 100%"></b><em>Tight</em></div>
-      </div>
-      <p class="rm-plate-label">The designer pilot</p>
-      <div class="rm-harness">
-        <div class="rm-box"><strong>UX designer</strong><span>Ships a design-system component</span></div>
-        <i class="rm-arrow" aria-hidden="true">→</i>
-        <div class="rm-box"><strong>Engineering</strong><span>Reviews the change</span></div>
-      </div>
-    </figure>
-
     <figure class="rm-plate" data-plate="rv">
       <div class="rm-counts">
         <div><b>1,500+</b><span>pull requests reviewed, most outside Operations</span></div>
@@ -267,7 +254,18 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
       <figcaption>Every answer streams at once, one tab per model, then the Arbiter compares them.</figcaption>
     </figure>
 
-    <figure class="rm-plate" data-plate="agt">
+    <figure class="rm-plate" data-plate="theory">
+      <div class="rm-draft">
+        <div class="rm-box"><strong>1 · Me</strong><span>What the piece does, and what must never be true</span></div>
+        <i class="rm-arrow" aria-hidden="true">↓</i>
+        <div class="rm-box rm-box-ink"><strong>2 · The agent</strong><span>The detail, each claim with its file and line</span></div>
+        <i class="rm-arrow" aria-hidden="true">↓</i>
+        <div class="rm-box"><strong>3 · Me again</strong><span>Mine, the agent's, or a merge, and I can say why</span></div>
+      </div>
+      <figcaption>Programming is theory building (Naur, 1985). Whoever drafts first anchors the result, so my attempt comes before the agent's draft, every time.</figcaption>
+    </figure>
+
+    <figure class="rm-plate" data-plate="loop">
       <ol class="rm-loop">
         {loop.map((s, i) => (
           <li class:list={[i === 5 && 'last']}><b>{i + 1}</b><span>{s}</span></li>
@@ -275,6 +273,17 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
       </ol>
       <div class="rm-gate"><span class="rm-chip">The gate</span>Before the PR, the engineer explains the change end to end, or it does not ship.</div>
       <figcaption>The engineer’s attempt comes before the agent’s draft, at every step.</figcaption>
+    </figure>
+
+    <figure class="rm-plate" data-plate="anywhere">
+      <div class="rm-scales">
+        <div><b>Solo</b><span>Pretty Good Software</span></div>
+        <div><b>Team</b><span>Operations, three to five engineers</span></div>
+        <div><b>Org</b><span>Buyers Edge, 20 engineers</span></div>
+      </div>
+      <div class="rm-loopline"><span>The same theory and the same loop</span></div>
+      <p class="rm-plate-label">In whichever harness</p>
+      <div class="rm-tags">{harnesses.map((h) => <span class="rm-chip">{h}</span>)}</div>
     </figure>
 
     <figure class="rm-plate" data-plate="apps">
@@ -320,15 +329,6 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
     <p class="rm-meta rise" style="--d: 440ms">Java · Spring · Angular</p>
   </template>
 
-  <template data-stop="ag" data-seg="Agents" data-slug="Buyers Edge · engineering with agents">
-    <p class="rm-meta-line rise">Buyers Edge, engineering with agents</p>
-    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">One agent harness for the whole engineering org</h2>
-    <p class="rm-lede rise" style="--d: 120ms">I maintain the team’s agent harness, its CLAUDE.md, lint rules and standards, so AI-assisted code from 20 engineers lands in one style.</p>
-    <ol class="rm-flow">
-      {agFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
-    </ol>
-  </template>
-
   <template data-stop="rv" data-seg="Review" data-slug="Buyers Edge · architecture">
     <p class="rm-meta-line rise">Buyers Edge, architecture</p>
     <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">Second reviewer on every architecture PR</h2>
@@ -347,12 +347,30 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
     </ol>
   </template>
 
-  <template data-stop="agt" data-seg="The loop" data-slug="agentom">
-    <p class="rm-meta-line rise">agentom, my coding harness</p>
-    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">The engineer explains it before the agent writes it</h2>
-    <p class="rm-lede rise" style="--d: 120ms">A harness for Claude Code, Cursor and Codex built on Naur’s programming as theory building. The engineer holds the theory of a feature while the agent does the detail, and the pre-PR gate fails if they cannot explain the change end to end.</p>
+  <template data-stop="theory" data-seg="The theory" data-slug="Working with agents · the theory">
+    <p class="rm-meta-line rise">Working with agents, the theory</p>
+    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">I keep the theory, the agent does the detail</h2>
+    <p class="rm-lede rise" style="--d: 120ms">A program lives in the head of whoever can explain it, change it and say why each part is as it is. Agents make code cheap, so the understanding is the part I protect: nothing ships that I cannot explain end to end.</p>
+    <ol class="rm-flow">
+      {theoryFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
+    </ol>
+  </template>
+
+  <template data-stop="loop" data-seg="The loop" data-slug="Working with agents · the loop">
+    <p class="rm-meta-line rise">Working with agents, the loop</p>
+    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">One loop for every feature</h2>
+    <p class="rm-lede rise" style="--d: 120ms">agentom is the loop as code. The agent starts every step and each one takes a breath to answer, so nothing depends on remembering a process.</p>
     <ol class="rm-flow">
       {agtFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
+    </ol>
+  </template>
+
+  <template data-stop="anywhere" data-seg="Anywhere" data-slug="Working with agents · anywhere">
+    <p class="rm-meta-line rise">Working with agents, anywhere</p>
+    <h2 class="rm-title rise" style="--d: 60ms" tabindex="-1">Solo, on a team, across an org</h2>
+    <p class="rm-lede rise" style="--d: 120ms">The loop is harness agnostic: Claude Code, Cursor, Codex and Devin read the same skills. What changes with the size of the group is what gets shared.</p>
+    <ol class="rm-flow">
+      {anywhereFlow.map(([k, v], i) => <li class="rise" style={`--d: ${200 + i * 50}ms`}><span>{k}</span>{v}</li>)}
     </ol>
   </template>
 
@@ -384,9 +402,9 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
 
   // The order here is the order of the tour and of the bar.
   const CHAPTERS: Chapter[] = [
-    { key: 'buyers-edge', name: 'Buyers Edge', years: 'since 2021', stops: ['ent', 'gl', 'br', 'ag', 'rv'] },
+    { key: 'buyers-edge', name: 'Buyers Edge', years: 'since 2021', stops: ['ent', 'gl', 'br', 'rv'] },
+    { key: 'agents', name: 'Working with agents', years: 'agentom', stops: ['theory', 'loop', 'anywhere'] },
     { key: 'collectiviq', name: 'CollectivIQ', years: 'since 2025', stops: ['ciq'] },
-    { key: 'agentom', name: 'agentom', years: '2026', stops: ['agt'] },
     { key: 'apps', name: 'Apps', years: '2026', stops: ['apps'] },
     { key: 'contact', name: 'Contact', years: '', stops: ['end'] },
   ];
@@ -405,8 +423,9 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   const stepCount = q<HTMLElement>('.rm-step-count');
   const back = q<HTMLButtonElement>('.rm-back');
   const next = q<HTMLButtonElement>('.rm-next');
-  const chaptersNav = q<HTMLElement>('.rm-chapters');
-  const barChapter = q<HTMLButtonElement>('.rm-bar-chapter');
+  const projectBtn = q<HTMLButtonElement>('.rm-project-btn');
+  const menu = q<HTMLElement>('.rm-menu');
+  const stopsNav = q<HTMLElement>('.rm-stops');
   const table = q<HTMLElement>('.rm-table');
   const toggle = document.getElementById('resume-toggle') as HTMLButtonElement | null;
 
@@ -426,7 +445,7 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   let saved = 0;
   let opener: HTMLElement | null = null;
   let busy = false;
-  let menuFor = '';
+  let menuOpen = false;
 
   const wide = () => innerWidth >= 1000;
 
@@ -516,85 +535,47 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
     stepNav.hidden = false;
   }
 
-  // One short timeline per chapter. A chapter with several stops drops down to them.
+  // The dropdown moves between projects; the timeline shows the current project's stops.
   function renderBar() {
     const at = ORDER.indexOf(view);
     const current = chapterOf(view);
-    chaptersNav.replaceChildren(
+    const count = current && current.stops.length > 1 ? `<span>${current.stops.indexOf(view) + 1} of ${current.stops.length}</span>` : '';
+    projectBtn.innerHTML = `${current ? current.name : 'Projects'}${count}<i aria-hidden="true">▾</i>`;
+    projectBtn.setAttribute('aria-expanded', String(menuOpen));
+
+    menu.hidden = !menuOpen;
+    menu.replaceChildren(
       ...CHAPTERS.map((c) => {
-        const group = document.createElement('div');
-        group.className = 'rm-ch';
-        group.style.flexGrow = String(Math.max(c.stops.length, 1.6));
-        if (c === current) group.dataset.current = 'true';
-
-        const name = document.createElement('button');
-        name.type = 'button';
-        name.className = 'rm-ch-name';
-        name.innerHTML = `${c.name}<span>${c.years}</span>${c.stops.length > 1 ? '<i aria-hidden="true">▾</i>' : ''}`;
-        if (c.stops.length > 1) {
-          name.setAttribute('aria-expanded', String(menuFor === c.key));
-          name.onclick = (e) => {
-            e.stopPropagation();
-            menuFor = menuFor === c.key ? '' : c.key;
-            renderBar();
-          };
-        } else {
-          name.onclick = () => go(c.stops[0]);
-        }
-
-        const bars = document.createElement('div');
-        bars.className = 'rm-ch-bars';
-        c.stops.forEach((id) => {
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'rm-ch-seg';
-          const i = ORDER.indexOf(id);
-          b.dataset.state = i === at ? 'now' : i < at ? 'past' : 'next';
-          b.setAttribute('aria-label', labelOf(id));
-          if (i === at) b.setAttribute('aria-current', 'step');
-          b.onclick = () => go(id);
-          bars.append(b);
-        });
-
-        const now = document.createElement('span');
-        now.className = 'rm-ch-now';
-        now.textContent = c === current && view !== 'end' ? labelOf(view) : '';
-
-        group.append(name, bars, now);
-
-        if (menuFor === c.key) {
-          const menu = document.createElement('div');
-          menu.className = 'rm-menu';
-          menu.setAttribute('role', 'menu');
-          c.stops.forEach((id, j) => {
-            const item = document.createElement('button');
-            item.type = 'button';
-            item.setAttribute('role', 'menuitem');
-            const i = ORDER.indexOf(id);
-            item.dataset.state = i === at ? 'now' : i < at ? 'past' : 'next';
-            item.innerHTML = `<span>${String(j + 1).padStart(2, '0')}</span>${labelOf(id)}`;
-            item.onclick = () => go(id);
-            menu.append(item);
-          });
-          group.append(menu);
-        }
-        return group;
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.setAttribute('role', 'menuitem');
+        const last = ORDER.indexOf(c.stops[c.stops.length - 1]);
+        item.dataset.state = c === current ? 'now' : last < at ? 'past' : 'next';
+        const stops = c.key === 'contact' ? '' : c.stops.length > 1 ? `${c.stops.length} stops` : '1 stop';
+        item.innerHTML = `<strong>${c.name}</strong><span>${[c.years, stops].filter(Boolean).join(' · ')}</span>`;
+        item.onclick = () => {
+          menuOpen = false;
+          if (c === current) renderBar();
+          else go(c.stops[0]);
+        };
+        return item;
       }),
     );
 
-    if (current && current.stops.length > 1) {
-      barChapter.innerHTML = `${current.name} <span>${current.stops.indexOf(view) + 1} of ${current.stops.length}</span> <i aria-hidden="true">▾</i>`;
-      barChapter.setAttribute('aria-expanded', String(menuFor === current.key));
-      barChapter.onclick = (e) => {
-        e.stopPropagation();
-        menuFor = menuFor === current.key ? '' : current.key;
-        renderBar();
-      };
-    } else {
-      barChapter.textContent = current ? current.name : 'Resume mode';
-      barChapter.removeAttribute('aria-expanded');
-      barChapter.onclick = null;
-    }
+    stopsNav.replaceChildren(
+      ...(current ? current.stops : []).map((id) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'rm-seg';
+        const i = ORDER.indexOf(id);
+        b.dataset.state = i === at ? 'now' : i < at ? 'past' : 'next';
+        if (i === at) b.setAttribute('aria-current', 'step');
+        b.innerHTML = `<span></span><em>${labelOf(id)}</em>`;
+        b.onclick = () => go(id);
+        return b;
+      }),
+    );
+    stopsNav.style.setProperty('--n', String(current ? current.stops.length : 1));
   }
 
   function show() {
@@ -602,7 +583,7 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
     root.dataset.end = view === 'end' ? 'true' : 'false';
     card.hidden = view !== 'card';
     card.classList.remove('rm-card-out');
-    menuFor = '';
+    menuOpen = false;
     if (view !== 'card') renderPanel();
     renderBar();
     frame();
@@ -611,13 +592,7 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   }
 
   function go(id: string) {
-    if (busy || id === view) {
-      if (menuFor) {
-        menuFor = '';
-        renderBar();
-      }
-      return;
-    }
+    if (busy || id === view) return;
     if (view === 'card' && !reduced.matches) {
       busy = true;
       card.classList.add('rm-card-out');
@@ -682,9 +657,14 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   q<HTMLButtonElement>('[data-rm-card]').onclick = () => go('card');
   toggle?.addEventListener('click', () => (root.hidden ? open('card') : close()));
 
+  projectBtn.onclick = (e) => {
+    e.stopPropagation();
+    menuOpen = !menuOpen;
+    renderBar();
+  };
   root.addEventListener('click', () => {
-    if (menuFor) {
-      menuFor = '';
+    if (menuOpen) {
+      menuOpen = false;
       renderBar();
     }
   });
@@ -692,8 +672,8 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   addEventListener('keydown', (e) => {
     if (root.hidden) return;
     if (e.key === 'Escape') {
-      if (menuFor) {
-        menuFor = '';
+      if (menuOpen) {
+        menuOpen = false;
         renderBar();
       } else close();
     } else if (e.key === 'ArrowRight' && view !== 'card' && view !== 'end') next.click();
@@ -924,7 +904,7 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
     box-sizing: border-box;
     padding: 0 48px;
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr) 200px;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
     align-items: center;
     gap: 28px;
     background: var(--paper);
@@ -934,68 +914,61 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   }
   .rm.rm-on .rm-bar { transform: none; }
   .rm-bar-title { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; background: none; border: 0; font-family: var(--font-display) !important; font-weight: 600; font-size: 16px; white-space: nowrap; cursor: pointer; }
-  .rm-bar-chapter { display: none; }
-  .rm-chapters { display: flex; gap: 22px; align-items: flex-start; min-width: 0; }
-  .rm-ch { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 3px; line-height: 16px; }
-  .rm-ch-name {
-    display: flex;
+  .rm-project { position: relative; }
+  .rm-project-btn {
+    display: inline-flex;
     align-items: baseline;
-    gap: 6px;
-    height: 18px;
-    line-height: 18px;
-    padding: 0;
-    background: none;
-    border: 0;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px;
+    background: var(--paper-lit);
+    border: 1.5px solid var(--ink);
     font-family: var(--font-display) !important;
     font-weight: 600;
-    font-size: 13px;
-    color: var(--ink-muted) !important;
+    font-size: 15px;
+    line-height: 41px;
     white-space: nowrap;
-    overflow: hidden;
     cursor: pointer;
-    text-align: left;
   }
-  .rm-ch[data-current='true'] .rm-ch-name { color: var(--ink) !important; }
-  .rm-ch-name span { font-family: var(--font-mono); font-weight: 400; font-size: 10px; color: var(--ink-muted); }
-  .rm-ch-name i { font-style: normal; font-size: 10px; }
-  .rm-ch:not([data-current]) .rm-ch-name span { display: none; }
-  .rm-ch-bars { display: flex; gap: 4px; }
-  .rm-ch-seg { flex: 1 1 0; height: 12px; padding: 4px 0; background: none; border: 0; cursor: pointer; }
-  .rm-ch-seg::before { content: ''; display: block; height: 4px; background: var(--rule); transition: background-color 300ms ease; }
-  .rm-ch-seg[data-state='past']::before { background: var(--grape); }
-  .rm-ch-seg[data-state='now']::before { background: var(--ink); }
-  .rm-ch-now { height: 14px; line-height: 14px; font-family: var(--font-mono); font-size: 10px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rm-project-btn span { font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--ink-muted); }
+  .rm-project-btn i { font-style: normal; font-size: 11px; }
   .rm-menu {
     position: absolute;
-    left: -12px;
-    top: 52px;
-    width: 260px;
+    left: 0;
+    top: 50px;
+    width: 280px;
     background: var(--paper-lit);
     border: 1.5px solid var(--ink);
     box-shadow: 10px 10px 0 var(--sunflower);
   }
+  .rm-menu[hidden] { display: none; }
   .rm-menu button {
     width: 100%;
-    display: grid;
-    grid-template-columns: 26px minmax(0, 1fr);
-    align-items: center;
-    min-height: 44px;
-    padding: 0 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    min-height: 52px;
+    padding: 7px 16px;
     background: none;
     border: 0;
     border-bottom: 1px solid var(--rule);
-    font-family: var(--font-display) !important;
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--ink-muted) !important;
     text-align: left;
     cursor: pointer;
   }
   .rm-menu button:last-child { border-bottom: 0; }
-  .rm-menu button span { font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--ink-muted); }
-  .rm-menu button[data-state='past'] { color: var(--grape) !important; }
-  .rm-menu button[data-state='now'] { color: var(--ink) !important; background: var(--paper); }
+  .rm-menu strong { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--ink); }
+  .rm-menu span { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+  .rm-menu button[data-state='past'] strong { color: var(--grape); }
+  .rm-menu button[data-state='now'] { background: var(--paper); }
   @media (hover: hover) { .rm-menu button:hover { background: var(--paper); } }
+  .rm-stops { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); gap: 6px; min-width: 0; }
+  .rm-seg { display: flex; flex-direction: column; justify-content: center; gap: 7px; min-height: 44px; padding: 0; background: none; border: 0; text-align: left; cursor: pointer; }
+  .rm-seg span { display: block; height: 4px; background: var(--rule); transition: background-color 300ms ease; }
+  .rm-seg em { font-style: normal; font-family: var(--font-mono); font-size: 10px; line-height: 14px; color: var(--ink-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .rm-seg[data-state='past'] span { background: var(--grape); }
+  .rm-seg[data-state='now'] span { background: var(--ink); }
+  .rm-seg[data-state='now'] em { color: var(--ink); }
   .rm-exit { justify-self: end; min-height: 44px; padding: 0 16px; font-size: 14px; }
 
   /* ---------- the table of plates (inside #page) ---------- */
@@ -1033,27 +1006,22 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   .rm-box-ink { background: var(--ink); color: var(--paper-lit); }
   .rm-box-ink span { color: var(--rule); }
 
-  .rm-tree { position: relative; height: 360px; }
-  .rm-tree .l, .rm-tree .p { position: absolute; background: var(--ink); }
-  .rm-tree .p { background: var(--grape); }
-  .rm-tree .n {
-    position: absolute;
-    height: 44px;
-    width: 140px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1.5px solid var(--ink);
-    background: var(--paper);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 15px;
-  }
-  .rm-tree .loc { font-family: var(--font-body); font-weight: 400; }
-  .rm-tree .on { background: var(--ink); color: var(--paper-lit); }
-  .rm-scope { position: absolute; left: 0; top: 150px; width: 352px; height: 210px; box-sizing: border-box; border: 1.5px dashed var(--grape); }
-  .rm-path-note { position: absolute; width: 200px; font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: var(--grape); }
+  .rm-tree { display: block; width: 100%; height: auto; overflow: visible; }
+  .rm-tree .scope { fill: rgba(75, 58, 140, 0.07); stroke: var(--grape); stroke-width: 1.5; stroke-dasharray: 5 4; }
+  .rm-tree .edge { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .rm-tree .resolve, .rm-tree .resolve-head { fill: none; stroke: var(--grape); stroke-width: 3; stroke-linejoin: miter; }
+  .rm-tree .node { fill: var(--paper); stroke: var(--ink); stroke-width: 1.5; }
+  .rm-tree .node.on { fill: var(--ink); }
+  .rm-tree .label, .rm-tree .loc, .rm-tree .tag-text { text-anchor: middle; dominant-baseline: central; }
+  .rm-tree .label { font-family: var(--font-display); font-weight: 600; font-size: 15px; fill: var(--ink); }
+  .rm-tree .loc { font-family: var(--font-body); font-size: 15px; fill: var(--ink); }
+  .rm-tree .loc.on { fill: var(--paper-lit); }
+  .rm-tree .tag { fill: var(--sunflower); }
+  .rm-tree .tag-text { font-family: var(--font-mono); font-size: 11px; fill: var(--ink); }
+  .rm-legend { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+  .rm-legend i { display: inline-block; flex: none; }
+  .rm-legend .resolve { width: 22px; height: 3px; background: var(--grape); }
+  .rm-legend .scope { width: 16px; height: 12px; margin-left: 14px; border: 1.5px dashed var(--grape); background: rgba(75, 58, 140, 0.07); }
 
   .rm-txn { border: 1.5px solid var(--ink); background: var(--paper); }
   .rm-txn:last-of-type { background: var(--paper-lit); }
@@ -1104,6 +1072,13 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
   .rm-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .rm-plate .rm-chip { color: var(--ink); font-size: 11px; }
 
+  .rm-draft { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
+  .rm-draft .rm-arrow { text-align: center; }
+  .rm-scales { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .rm-scales div { display: flex; flex-direction: column; gap: 4px; padding: 16px; border: 1.5px solid var(--ink); background: var(--paper); }
+  .rm-scales b { font-family: var(--font-display); font-weight: 600; font-size: 22px; }
+  .rm-scales span { font-size: 14px; line-height: 1.35; color: var(--ink-muted); }
+  .rm-loopline { position: relative; padding: 12px 14px; border: 1.5px solid var(--grape); background: rgba(75, 58, 140, 0.07); text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--grape); }
   .rm-loop { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
   .rm-loop li { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1.5px solid var(--ink); background: var(--paper); font-family: var(--font-display); font-weight: 600; font-size: 15px; }
   .rm-loop b { font-size: 22px; line-height: 1; }
@@ -1117,18 +1092,14 @@ const loop = ['Pick it up', 'Own it', 'Shape it', 'Build it', 'Prove it', 'Leave
 
   /* ---------- phone ---------- */
   @media (max-width: 999px) {
-    .rm-bar { padding: 0 8px 0 16px; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto; gap: 0 8px; }
+    .rm-bar { height: auto; padding: 8px 8px 8px 16px; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; gap: 4px 8px; }
     .rm-bar-title { display: none; }
-    .rm-bar-chapter { display: flex; align-items: baseline; gap: 6px; min-height: 44px; padding: 0; background: none; border: 0; font-family: var(--font-display) !important; font-weight: 600; font-size: 15px; text-align: left; cursor: pointer; }
-    .rm-bar-chapter span { font-family: var(--font-mono); font-weight: 400; font-size: 11px; color: var(--ink-muted); }
-    .rm-bar-chapter i { font-style: normal; font-size: 11px; }
-    .rm-chapters { grid-column: 1 / -1; grid-row: 2; padding: 0 8px 6px 0; gap: 10px; }
-    .rm-ch { position: static; gap: 0; }
-    .rm-ch-name, .rm-ch-now { display: none; }
-    .rm-ch-bars { gap: 3px; }
-    .rm-ch-seg { height: 10px; padding: 3px 0; }
-    .rm-ch-seg::before { height: 3px; }
-    .rm-menu { position: fixed; left: 0; right: 0; top: 64px; width: auto; box-shadow: none; border-width: 0 0 1.5px; }
+    .rm-project-btn { padding: 0; background: none; border: 0; }
+    .rm-menu { position: fixed; left: 0; right: 0; top: 64px; width: auto; box-shadow: none; border-width: 1.5px 0; }
+    .rm-stops { grid-column: 1 / -1; grid-row: 2; padding-right: 8px; gap: 4px; }
+    .rm-seg { min-height: 0; gap: 0; }
+    .rm-seg span { height: 3px; }
+    .rm-seg em { display: none; }
     .rm-exit { border: 0; padding: 0 12px; }
     .rm-exit-long { display: none; }
 
