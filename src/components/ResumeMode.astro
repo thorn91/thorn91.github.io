@@ -93,6 +93,11 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
   <div class="rm-offset" aria-hidden="true"></div>
   <div class="rm-spot" aria-hidden="true"></div>
   <div class="rm-slug" aria-hidden="true"></div>
+  <button type="button" class="rm-zoom-hit" aria-label="Enlarge the drawing"><span>Enlarge</span></button>
+  <div class="rm-zoom" role="dialog" aria-label="The drawing, full size" hidden>
+    <button type="button" class="rm-btn rm-btn-ghost rm-zoom-close">Close <span aria-hidden="true">×</span></button>
+    <div class="rm-zoom-body"></div>
+  </div>
 
   <div class="rm-card" hidden>
     <div class="rm-card-head rise" style="--d: 140ms">
@@ -426,6 +431,9 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
   const menu = q<HTMLElement>('.rm-menu');
   const stopsNav = q<HTMLElement>('.rm-stops');
   const table = q<HTMLElement>('.rm-table');
+  const zoomHit = q<HTMLButtonElement>('.rm-zoom-hit');
+  const zoom = q<HTMLElement>('.rm-zoom');
+  const zoomBody = q<HTMLElement>('.rm-zoom-body');
   const toggle = document.getElementById('resume-toggle') as HTMLButtonElement | null;
 
   page.appendChild(table);
@@ -462,12 +470,14 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
   }
 
   function stage(): Box {
+    // The bar wraps to two rows on a phone, so measure it rather than assume.
+    const bar = q<HTMLElement>('.rm-bar').offsetHeight || BAR;
     if (wide()) {
       const panel = Math.min(464, innerWidth * 0.36);
-      return { x: 40, y: BAR + 40, w: innerWidth - panel - 48 - 40 - 56, h: innerHeight - BAR - 80 };
+      return { x: 40, y: bar + 40, w: innerWidth - panel - 48 - 40 - 56, h: innerHeight - bar - 80 };
     }
     const sheet = Math.round(innerHeight * 0.5);
-    return { x: 16, y: BAR + 22, w: innerWidth - 32, h: innerHeight - sheet - BAR - 40 };
+    return { x: 16, y: bar + 30, w: innerWidth - 32, h: innerHeight - sheet - bar - 48 };
   }
 
   function fit(r: Box, box: Box, max: number): Box & { s: number } {
@@ -510,6 +520,7 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
 
     const pad = wide() ? 14 : 8;
     place(spot, { x: shown.x - pad, y: shown.y - pad, w: shown.w + pad * 2, h: shown.h + pad * 2 });
+    place(zoomHit, { x: shown.x - pad, y: shown.y - pad, w: shown.w + pad * 2, h: shown.h + pad * 2 });
     const slugText = stopTemplates.get(view)?.dataset.slug ?? '';
     slug.textContent = slugText;
     slug.hidden = !slugText;
@@ -578,6 +589,7 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
   }
 
   function show() {
+    closeZoom();
     root.dataset.view = view === 'card' ? 'card' : 'tour';
     root.dataset.end = view === 'end' ? 'true' : 'false';
     card.hidden = view !== 'card';
@@ -630,6 +642,7 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
 
   function close() {
     if (root.hidden) return;
+    closeZoom();
     root.classList.remove('rm-on');
     setCamera(1, 0, -saved);
     toggle?.setAttribute('aria-pressed', 'false');
@@ -648,6 +661,24 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
       opener?.focus({ preventScroll: true });
     }, duration());
   }
+
+  // On a phone the plate is shrunk to fit; this shows a copy at full size in a
+  // plain scrolling layer, so panning is ordinary scrolling.
+  function openZoom() {
+    if (view === 'card' || view === 'end') return;
+    zoomBody.replaceChildren(plateOf(view).cloneNode(true));
+    zoom.hidden = false;
+    zoom.scrollTo(0, 0);
+    q<HTMLButtonElement>('.rm-zoom-close').focus({ preventScroll: true });
+  }
+  function closeZoom() {
+    if (zoom.hidden) return;
+    zoom.hidden = true;
+    zoomBody.replaceChildren();
+    zoomHit.focus({ preventScroll: true });
+  }
+  zoomHit.onclick = openZoom;
+  q<HTMLButtonElement>('.rm-zoom-close').onclick = closeZoom;
 
   back.onclick = () => go(ORDER[ORDER.indexOf(view) - 1]);
   next.onclick = () => go(ORDER[ORDER.indexOf(view) + 1]);
@@ -670,6 +701,10 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
 
   addEventListener('keydown', (e) => {
     if (root.hidden) return;
+    if (!zoom.hidden) {
+      if (e.key === 'Escape') closeZoom();
+      return;
+    }
     if (e.key === 'Escape') {
       if (menuOpen) {
         menuOpen = false;
@@ -1089,6 +1124,25 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
   .rm-app img { width: 200px; height: 434px; object-fit: cover; object-position: top; box-sizing: border-box; border: 1.5px solid var(--ink); box-shadow: 12px 12px 0 var(--sunflower); }
   .rm-app strong { font-family: var(--font-display); font-weight: 600; font-size: 18px; }
 
+  /* ---------- enlarge a plate (phone) ---------- */
+  .rm-zoom-hit { display: none; }
+  .rm-zoom {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    box-sizing: border-box;
+    padding: 72px 16px 32px;
+    background: var(--paper);
+    pointer-events: auto;
+  }
+  .rm-zoom[hidden] { display: none; }
+  .rm-zoom-close { position: fixed; top: 12px; right: 12px; z-index: 1; background: var(--paper-lit); }
+  .rm-zoom-body { width: max-content; }
+  .rm-zoom-body .rm-plate { border-color: var(--ink); }
+
   /* ---------- phone ---------- */
   @media (max-width: 999px) {
     .rm-bar { height: auto; padding: 8px 8px 8px 16px; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; gap: 4px 8px; }
@@ -1119,5 +1173,24 @@ const harnesses = ['Claude Code', 'Cursor', 'Codex', 'Devin'];
     .rm-title { font-size: 26px; }
     .rm-step-nav { padding: 12px 20px 20px; }
     .rm-slug { height: 22px; font-size: 10px; padding: 0 8px; }
+    .rm.rm-on[data-view='tour'][data-end='false'] .rm-zoom-hit {
+      display: block;
+      position: fixed;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      pointer-events: auto;
+      cursor: zoom-in;
+    }
+    .rm-zoom-hit span {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      padding: 3px 8px;
+      background: var(--ink);
+      color: var(--paper-lit);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
   }
 </style>
